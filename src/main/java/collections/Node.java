@@ -1,4 +1,4 @@
-package src.collections;
+package src.main.java.collections;
 
 public class Node<T> {
 
@@ -11,6 +11,10 @@ public class Node<T> {
 
     public T getData() {
         return this.data;
+    }
+
+    public void setNextNode(T data) {
+        this.nextNode = new Node<>(data);
     }
 
     public Node<T> getNextNode() {
