@@ -1,6 +1,8 @@
 package src.main.java.collections;
 
-public class MyLinkedList<T> {
+import java.util.Iterator;
+
+public class MyLinkedList<T> implements Iterable<T> {
 
     private Node<T> node;
     private int size = 0;
@@ -49,6 +51,30 @@ public class MyLinkedList<T> {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedListIterator();
+    }
+
+    private class LinkedListIterator implements Iterator<T> {
+        private Node<T> currentNode = node;
+
+        @Override
+        public boolean hasNext() {
+            return currentNode != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NullPointerException("요소가 없음");
+            }
+            T data = currentNode.getData();
+            currentNode = currentNode.getNextNode();
+            return data;
+        }
     }
 
 }
