@@ -53,6 +53,10 @@ public class MyLinkedList<T> implements Iterable<T> {
         return size == 0;
     }
 
+    public int size() {
+        return this.size;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new LinkedListIterator();
