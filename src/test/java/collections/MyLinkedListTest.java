@@ -6,30 +6,58 @@ import src.main.java.collections.MyLinkedList;
 
 public class MyLinkedListTest {
 
-    private MyLinkedList<Integer> list;
+    private MyLinkedList<String> list;
 
     @BeforeEach
     public void setup() {
         list = new MyLinkedList<>();
+        list.add("A");
+        list.add("B");
+        list.add("C");
     }
 
     @Test
     public void testGetSuccess() {
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        Assertions.assertEquals(1, list.get(0));
-        Assertions.assertEquals(2, list.get(1));
-        Assertions.assertEquals(3, list.get(2));
+        Assertions.assertEquals("A", list.get(0));
+        Assertions.assertEquals("B", list.get(1));
+        Assertions.assertEquals("C", list.get(2));
     }
 
     @Test
     public void testGetFail() {
-        list.add(1);
-        list.add(2);
-        list.add(3);
         Assertions.assertThrows(NullPointerException.class, () -> {
             list.get(-1);
+        });
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            list.get(3);
+        });
+    }
+
+    @Test
+    public void testDeleteFirstSuccess() {
+        list.delete(0);
+        Assertions.assertEquals("B", list.get(0));
+        Assertions.assertEquals("C", list.get(1));
+    }
+
+    @Test
+    public void testDeleteMiddleSuccess() {
+        list.delete(1);
+        Assertions.assertEquals("A", list.get(0));
+        Assertions.assertEquals("C", list.get(1));
+    }
+
+    @Test
+    public void testDeleteLastSuccess() {
+        list.delete(2);
+        Assertions.assertEquals("A", list.get(0));
+        Assertions.assertEquals("B", list.get(1));
+    }
+
+    @Test
+    public void testDeleteFail() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            list.delete(-1);
         });
         Assertions.assertThrows(NullPointerException.class, () -> {
             list.get(3);

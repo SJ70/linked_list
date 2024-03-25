@@ -13,13 +13,13 @@ public class Node<T> {
         return this.data;
     }
 
-    public void setNextNode(T data) {
-        this.nextNode = new Node<>(data);
+    public void setNextNode(Node<T> node) {
+        this.nextNode = node;
     }
 
     public Node<T> getNextNode() {
         if (!this.hasNextNode()) {
-            throw new NullPointerException("다음 노드가 없습니다.");
+            return null;
         }
         return nextNode;
     }

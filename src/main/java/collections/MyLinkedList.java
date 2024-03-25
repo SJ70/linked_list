@@ -10,13 +10,30 @@ public class MyLinkedList<T> {
     }
 
     public void add(T data) {
+        Node node = new Node<>(data);
         if (this.isEmpty()) {
-            this.node = new Node<>(data);
+            this.node = node;
         }
         else {
-            this.getNode(size - 1).setNextNode(data);
+            this.getNode(size - 1).setNextNode(node);
         }
         size++;
+    }
+
+    public void delete(int index) {
+        if (index == 0) {
+            this.node = this.node.getNextNode();
+        }
+        else if (index == size - 1) {
+            Node prevNode = this.getNode(index - 1);
+            prevNode.setNextNode(null);
+        }
+        else {
+            Node prevNode = this.getNode(index - 1);
+            Node nextNode = prevNode.getNextNode().getNextNode();
+            prevNode.setNextNode(nextNode);
+        }
+        size--;
     }
 
     public Node<T> getNode(int index) {
@@ -33,6 +50,5 @@ public class MyLinkedList<T> {
     public boolean isEmpty() {
         return size == 0;
     }
-
 
 }
